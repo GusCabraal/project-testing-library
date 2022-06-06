@@ -31,7 +31,7 @@ describe('Testando o componente App', () => {
 
     userEvent.click(homeLink);
     const titleHome = await screen
-      .queryByRole('heading', { name: /encountered pokémons/i });
+      .findByRole('heading', { name: /encountered pokémons/i });
     expect(titleHome).toBeInTheDocument();
 
     history.push('/pagina-nao-encontrada');
