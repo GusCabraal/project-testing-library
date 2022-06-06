@@ -39,48 +39,4 @@ describe('Testando o componente App', () => {
       .getByRole('heading', { name: /page requested not found/i });
     expect(titleNotFound).toBeInTheDocument();
   });
-  // const titleEl = screen.getByRole('heading', { name: /minha página/i });
-
-  // expect(aboutMeLink).toBeInTheDocument();
-
-  // userEvent.click(aboutMeLink);
-
-  // const aboutMeTitle = screen.getByRole('heading', { name: /sobre mim/i });
-  // expect(aboutMeTitle).toBeInTheDocument();
-
-  //   test('Verifica se aparece "minha página" e se navega para "projetos"', () => {
-  //     render(
-  //       <MemoryRouter>
-  //         <App />
-  //       </MemoryRouter>,
-  //     );
-  //     const titleEl = screen.getByRole('heading', { name: /minha página/i });
-  //     expect(titleEl).toBeInTheDocument();
-
-  //     const projectsLink = screen.getByRole('link', { name: /projetos/i });
-  //     expect(projectsLink).toBeInTheDocument();
-
-  //     userEvent.click(projectsLink);
-
-  //     const projectsTitle = screen.getByRole('heading', {
-  //       name: /meus projetos/i,
-  //     });
-  //     expect(projectsTitle).toBeInTheDocument();
-  //   });
-
-  //   test('Verifica se a pagina 404 é renderizada corretamente', () => {
-  //     // const history = createMemoryHistory()
-  //     // render(
-  //     //   <Router history={history}>
-  //     //     <App />
-  //     //   </Router>
-  //     // );
-  //     // history.push('/lalaland')
-
-  //     const { history } = renderWithRouter(<App />);
-  //     history.push('/lalaland');
-
-  //     const notFoundTitle = screen.getByRole('heading', { name: /404/i });
-  //     expect(notFoundTitle).toBeInTheDocument();
-  //   });
 });
