@@ -16,7 +16,7 @@ describe('Testando o componente App', () => {
     expect(favoritePokeLink).toBeInTheDocument();
   });
 
-  test('Teste se a aplicação é redirecionada ao clicar em um link', async () => {
+  test('Teste se a aplicação é redirecionada ao clicar em um link', () => {
     const { history } = renderWithRouter(<App />);
     const homeLink = screen.getByRole('link', { name: /home/i });
     const aboutLink = screen.getByRole('link', { name: /about/i });
@@ -31,8 +31,7 @@ describe('Testando o componente App', () => {
     expect(titleFavorite).toBeInTheDocument();
 
     userEvent.click(homeLink);
-    const titleHome = await screen
-      .findByRole('heading', { name: /encountered pokémons/i });
+    const titleHome = screen.getByRole('heading', { name: /encountered pokémons/i });
     expect(titleHome).toBeInTheDocument();
 
     history.push('/pagina-nao-encontrada');

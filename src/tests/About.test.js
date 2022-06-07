@@ -4,8 +4,10 @@ import { About } from '../pages';
 import renderWithRouter from './renderWithRouter';
 
 describe('Testando o componente About', () => {
-  test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
+  beforeEach(() => {
     renderWithRouter(<About />);
+  });
+  test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
     const titleAbout = screen
       .getByRole('heading', { name: /about pokédex/i, level: 2 });
 
@@ -13,7 +15,6 @@ describe('Testando o componente About', () => {
   });
 
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
-    renderWithRouter(<About />);
     const paragraph1 = screen
       .getByText(/This application simulates a Pokédex, a digital encyclopedia contai/i);
     const paragraph2 = screen
@@ -24,9 +25,10 @@ describe('Testando o componente About', () => {
   });
 
   test('Teste se a página contém a imagem de uma Pokédex', () => {
-    renderWithRouter(<About />);
     const imageEl = screen.getByAltText(/pokédex/i);
+    const URL_IMAGE = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
     expect(imageEl).toBeInTheDocument();
-    expect(imageEl).toHaveProperty('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+    expect(imageEl).toHaveProperty('src', URL_IMAGE);
   });
 });

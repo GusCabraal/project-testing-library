@@ -8,9 +8,11 @@ import pokemons from '../data';
 describe('Testando o componente Pokemon details', () => {
   const pikachu = pokemons[0];
   const { name, summary, foundAt } = pikachu;
+  beforeEach(() => {
+    renderWithRouter(<App />);
+  });
 
   test('se as informações detalhadas do pokemon aparecem na tela', () => {
-    renderWithRouter(<App />);
     const detailsLink = screen.queryByRole('link', { name: /more details/i });
     userEvent.click(detailsLink);
     expect(detailsLink).not.toBeInTheDocument();
@@ -25,7 +27,6 @@ describe('Testando o componente Pokemon details', () => {
   });
 
   test('se existe uma seção com os mapas contendo as localizações do pokémon', () => {
-    renderWithRouter(<App />);
     const detailsLink = screen.queryByRole('link', { name: /more details/i });
     userEvent.click(detailsLink);
 
@@ -42,7 +43,6 @@ describe('Testando o componente Pokemon details', () => {
     });
   });
   test('se o usuário pode favoritar um pokémon através da página de detalhes', () => {
-    renderWithRouter(<App />);
     const detailsLink = screen.queryByRole('link', { name: /more details/i });
     userEvent.click(detailsLink);
 

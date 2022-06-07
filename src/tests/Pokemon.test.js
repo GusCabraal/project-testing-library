@@ -16,8 +16,7 @@ describe('Testando o componente Pokemon', () => {
     const pokemonType = screen.getAllByText(`${type}`);
     const pokemonWeight = screen.getByText(averageWeight);
     const detailsLink = screen.getByRole('link', { name: /more details/i });
-    const imageEl = screen
-      .getByAltText(`${name} sprite`);
+    const imageEl = screen.getByAltText(`${name} sprite`);
 
     expect(pokemonName).toBeInTheDocument();
     expect(pokemonType).toHaveLength(2);
@@ -30,7 +29,7 @@ describe('Testando o componente Pokemon', () => {
   test('se o link possui url /pokemons/<id>', () => {
     renderWithRouter(<App />);
     const detailsLink = screen.getByRole('link', { name: /more details/i });
-    expect(detailsLink).toHaveProperty('href', `http://localhost/pokemons/${id}`);
+    expect(detailsLink.href).toContain(`pokemons/${id}`);
   });
 
   test('Teste se a aplicação é redirecionada ao clicar em um link', () => {
@@ -38,6 +37,7 @@ describe('Testando o componente Pokemon', () => {
 
     const detailsLink = screen.getByRole('link', { name: /more details/i });
     userEvent.click(detailsLink);
+
     const { location: { pathname } } = history;
     expect(pathname).toBe(`/pokemons/${id}`);
   });
@@ -52,7 +52,6 @@ describe('Testando o componente Pokemon', () => {
     expect(checkbox).toBeChecked();
 
     history.push('/');
-
     expect(screen.getByText(/encountered/i)).toBeInTheDocument();
     const starPoke = screen.getByAltText(`${name} is marked as favorite`);
     expect(starPoke).toBeInTheDocument();
