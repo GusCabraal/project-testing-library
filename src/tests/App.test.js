@@ -15,6 +15,7 @@ describe('Testando o componente App', () => {
     expect(aboutLink).toBeInTheDocument();
     expect(favoritePokeLink).toBeInTheDocument();
   });
+
   test('Teste se a aplicação é redirecionada ao clicar em um link', async () => {
     const { history } = renderWithRouter(<App />);
     const homeLink = screen.getByRole('link', { name: /home/i });

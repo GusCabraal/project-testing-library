@@ -22,6 +22,7 @@ describe('Testando o componente About', () => {
     expect(paragraph1).toBeInTheDocument();
     expect(paragraph2).toBeInTheDocument();
   });
+
   test('Teste se a página contém a imagem de uma Pokédex', () => {
     renderWithRouter(<About />);
     const imageEl = screen.getByAltText(/pokédex/i);

@@ -12,9 +12,6 @@ describe('Testando o componente Pokemon', () => {
 
   test('se as informções do pokemon aparecem na tela', () => {
     renderWithRouter(<App />);
-    const pokemonNameId = screen.getByTestId('pokemon-name');
-    const pokemonTypeId = screen.getByTestId('pokemon-type');
-    const pokemonWeightId = screen.getByTestId('pokemon-weight');
     const pokemonName = screen.getByText(`${name}`);
     const pokemonType = screen.getAllByText(`${type}`);
     const pokemonWeight = screen.getByText(averageWeight);
@@ -25,15 +22,12 @@ describe('Testando o componente Pokemon', () => {
     expect(pokemonName).toBeInTheDocument();
     expect(pokemonType).toHaveLength(2);
     expect(pokemonWeight).toBeInTheDocument();
-    expect(pokemonNameId).toBeInTheDocument();
-    expect(pokemonTypeId).toBeInTheDocument();
-    expect(pokemonWeightId).toBeInTheDocument();
     expect(detailsLink).toBeInTheDocument();
     expect(imageEl).toBeInTheDocument();
     expect(imageEl).toHaveProperty('src', image);
   });
 
-  test('se o link possui url /pokemon/<id>', () => {
+  test('se o link possui url /pokemons/<id>', () => {
     renderWithRouter(<App />);
     const detailsLink = screen.getByRole('link', { name: /more details/i });
     expect(detailsLink).toHaveProperty('href', `http://localhost/pokemons/${id}`);
@@ -58,6 +52,7 @@ describe('Testando o componente Pokemon', () => {
     expect(checkbox).toBeChecked();
 
     history.push('/');
+
     expect(screen.getByText(/encountered/i)).toBeInTheDocument();
     const starPoke = screen.getByAltText(`${name} is marked as favorite`);
     expect(starPoke).toBeInTheDocument();

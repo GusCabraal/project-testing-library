@@ -28,29 +28,32 @@ describe('Testando o componente Pokedex', () => {
   test('Teste se é mostrado apenas um pokémon por vez', () => {
     const pokemonNames = pokemons.map(({ name }) => name);
     renderWithRouter(<App />);
-    pokemonNames.shift('Pikachu');
+    pokemonNames.shift();
 
     pokemonNames.forEach((pokemonName) => {
       expect(screen.queryByText(pokemonName)).not.toBeInTheDocument();
     });
   });
+
   test('Teste se a Pokédex tem os botões de filtro', () => {
     renderWithRouter(<App />);
     const pokemonsTypes = [...new Set(pokemons
       .reduce((types, { type }) => [...types, type], []))];
+
     const buttonAll = screen.getByRole('button', { name: 'All' });
     expect(buttonAll).toBeInTheDocument();
 
-    const buttons = screen.getAllByTestId('pokemon-type-button');
-    pokemonsTypes.forEach((type, index) => {
-      expect(screen.getByRole('button', { name: type })).toBeInTheDocument();
-      expect(buttons[index]).toBeInTheDocument();
+    pokemonsTypes.forEach((type) => {
+      const buttonType = screen.getByRole('button', { name: type });
+      expect(buttonType).toBeInTheDocument();
+      expect(buttonType).toHaveAttribute('data-testid', 'pokemon-type-button');
     });
   });
   test('A Pokédex deve circular somente pelos pokémons daquele tipo', () => {
     renderWithRouter(<App />);
     const pokemonsTypes = [...new Set(pokemons
       .reduce((types, { type }) => [...types, type], []))];
+
     pokemonsTypes.forEach((type) => {
       const buttonEl = screen.getByRole('button', { name: type });
       userEvent.click(buttonEl);
@@ -66,8 +69,10 @@ describe('Testando o componente Pokedex', () => {
     renderWithRouter(<App />);
     const pokemonNames = pokemons.map(({ name }) => name);
     pokemonNames.push('Pikachu');
+
     const buttonEl = screen.getByRole('button', { name: /próximo pokémon/i });
     const buttonAll = screen.getByRole('button', { name: 'All' });
+
     userEvent.click(buttonAll);
     pokemonNames.forEach((pokemonName) => {
       expect(screen.getByText(pokemonName)).toBeInTheDocument();

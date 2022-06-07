@@ -9,7 +9,7 @@ describe('Testando o componente Pokemon details', () => {
   const pikachu = pokemons[0];
   const { name, summary, foundAt } = pikachu;
 
-  test('se as informções detalhadas do pokemon aparecem na tela', () => {
+  test('se as informações detalhadas do pokemon aparecem na tela', () => {
     renderWithRouter(<App />);
     const detailsLink = screen.queryByRole('link', { name: /more details/i });
     userEvent.click(detailsLink);
